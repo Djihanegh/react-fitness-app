@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Box, Stack, Button, TextField, Typography } from "@mui/material";
+import {
+  exerciseOptions,
+  fetchData,
+  EXERCISE_DB_URL,
+} from "../utils/fetchData";
+
 const SearchExercises = () => {
   const [search, setSearch] = useState("");
   const handleSearch = async () => {
     if (search) {
-      // const exercisesData = await fetchData();
+      const exercisesData = await fetchData(EXERCISE_DB_URL, exerciseOptions);
+      const searchedExercises = exercisesData.filter(
+        (exercise) =>
+          exercise.name.toLowerCase().includes(search) ||
+          exercise.target.toLowerCase().includes(search) ||
+          exercise.equipement.toLowerCase().includes(search) ||
+          exercise.bodyPart.toLowerCase().includes(search)
+      );
+      console.log(exercisesData);
     }
   };
   return (
@@ -62,7 +76,7 @@ const SearchExercises = () => {
             right: 0,
             ml: 1,
           }}
-          onClick
+          onClick={handleSearch}
         >
           Search
         </Button>
