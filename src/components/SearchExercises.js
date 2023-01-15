@@ -7,6 +7,8 @@ import {
   BODY_PARTS_URL,
 } from "../utils/fetchData";
 
+import HorizontalScrollbar from "./HorizontalScrollbar";
+
 const SearchExercises = () => {
   const [search, setSearch] = useState("");
   const [exercises, setExercises] = useState([]);
@@ -94,6 +96,10 @@ const SearchExercises = () => {
         >
           Search
         </Button>
+      </Box>
+
+      <Box sx={{ position: "relative", p: "20px", width: "100%" }}>
+        <HorizontalScrollbar data={bodyParts} />
       </Box>
     </Stack>
   );
