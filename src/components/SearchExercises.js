@@ -4,10 +4,23 @@ import {
   exerciseOptions,
   fetchData,
   EXERCISE_DB_URL,
+  BODY_PARTS_URL,
 } from "../utils/fetchData";
 
 const SearchExercises = () => {
   const [search, setSearch] = useState("");
+  const [exercises, setExercises] = useState([]);
+  const [bodyParts, setBodyParts] = useState([]);
+
+  useEffect(() => {
+    const fetchExercisesData = async () => {
+      const bodyPartsData = await fetchData(BODY_PARTS_URL, exerciseOptions);
+      setBodyParts(["all", ...bodyPartsData]);
+    };
+
+    fetchExercisesData();
+  }, []);
+
   const handleSearch = async () => {
     if (search) {
       const exercisesData = await fetchData(EXERCISE_DB_URL, exerciseOptions);
@@ -18,7 +31,8 @@ const SearchExercises = () => {
           exercise.equipement.toLowerCase().includes(search) ||
           exercise.bodyPart.toLowerCase().includes(search)
       );
-      console.log(exercisesData);
+      setSearch("");
+      setExercises(searchedExercises);
     }
   };
   return (

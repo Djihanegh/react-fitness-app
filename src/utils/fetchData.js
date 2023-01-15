@@ -15,3 +15,5 @@ export const fetchData = async (url, options) => {
 };
 
 export const EXERCISE_DB_URL = "https://exercisedb.p.rapidapi.com/exercises";
+export const BODY_PARTS_URL =
+  "https://exercisedb.p.rapidapi.com/exercises/bodyParts";
